@@ -5664,6 +5664,12 @@ ST_FUNC void unary(void)
 	parse_builtin_params(0, "ee");
 	vpop();
         break;
+    case TOK_builtin_unreachable:
+	/* __builtin_unreachable is a no-op for now */
+	parse_builtin_params(0, "");
+	vpushi(0);
+    vtop->type.t = VT_VOID;
+        break;
     case TOK_builtin_types_compatible_p:
 	parse_builtin_params(0, "tt");
 	vtop[-1].type.t &= ~(VT_CONSTANT | VT_VOLATILE);
